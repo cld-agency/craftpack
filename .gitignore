@@ -1,4 +1,10 @@
 /.env
 /.idea
+/node_modules
 /vendor
+
 .DS_Store
+/web/dist/*
+/web/sw.js
+
+!/web/dist/.gitkeep
