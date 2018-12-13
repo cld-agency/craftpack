@@ -1,9 +1,11 @@
 /.env
 /.idea
+/.vagrant
 /node_modules
 /vendor
 
 .DS_Store
+/config/license.key
 /web/dist/*
 /web/sw.js
 
