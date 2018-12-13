@@ -11,6 +11,7 @@ const webpack = require('webpack');
 // webpack plugins
 const Dashboard = require('webpack-dashboard');
 const DashboardPlugin = require('webpack-dashboard/plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const dashboard = new Dashboard();
 
 // config files
@@ -87,20 +88,17 @@ const configurePostcssLoader = (buildType) => {
     // Don't generate CSS for the legacy config in development
     if (buildType === LEGACY_CONFIG) {
         return {
-            test: /\.(pcss|css)$/,
+            test: /\.(scss|css)$/,
             loader: 'ignore-loader'
         };
     }
     if (buildType === MODERN_CONFIG) {
         return {
-            test: /\.(pcss|css)$/,
+            test: /\.(scss|css)$/,
             use: [
-                {
-                    loader: 'style-loader',
-                },
-                {
-                    loader: 'vue-style-loader',
-                },
+                MiniCssExtractPlugin.loader,
+                { loader: 'resolve-url-loader' },
+                { loader: 'style-loader' },
                 {
                     loader: 'css-loader',
                     options: {
@@ -109,13 +107,8 @@ const configurePostcssLoader = (buildType) => {
                     }
                 },
                 {
-                    loader: 'resolve-url-loader'
-                },
-                {
-                    loader: 'postcss-loader',
-                    options: {
-                        sourceMap: true
-                    }
+                    loader: 'sass-loader',
+                    options: { sourceMap: true } 
                 }
             ]
         };

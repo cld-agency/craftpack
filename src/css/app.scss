@@ -1,8 +1,5 @@
 /**
- * app.css
- *
  * The entry point for the css.
- *
  */
 
 /**
@@ -26,9 +23,9 @@
  * override them.
  *
  */
-@import './components/global.pcss';
-@import './components/typography.pcss';
-@import './components/webfonts.pcss';
+@import 'components/global';
+@import 'components/typography';
+@import 'components/webfonts';
 
 /**
  * This injects all of Tailwind's utility classes, generated based on your
@@ -41,10 +38,10 @@
  * Include styles for individual pages
  *
  */
-@import './pages/homepage.pcss';
+@import 'pages/homepage';
 
 /**
  * Include vendor css.
  *
  */
- @import 'vendor.pcss';
+ @import 'vendor';
