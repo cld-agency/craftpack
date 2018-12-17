@@ -4,9 +4,9 @@
     "description": "Experimenting with Craft and Webpack.",
     "scripts": {
         "build": "webpack --config webpack.config.dev.js",
-        "dashboard": "webpack-dashboard -- webpack --watch --config webpack.config.dev.js",
+        "dashboard": "webpack-dashboard -- webpack-dev-server --inline --hot --no-info -- webpack --watch --config webpack.config.dev.js",
         "production": "webpack --config webpack.config.prod.js",
-        "watch": "webpack --watch --config webpack.config.dev.js"
+        "watch": "webpack --watch --config webpack.config.dev.js -- webpack-dev-server --inline --hot --no-info"
     },
     "repository": {
         "type": "git",
@@ -38,6 +38,7 @@
         "webpack": "^4.27.1",
         "webpack-cli": "^3.1.2",
         "webpack-dashboard": "^2.0.0",
+        "webpack-dev-server": "^3.1.10",
         "webpack-manifest-plugin": "^2.0.4"
     }
 }
