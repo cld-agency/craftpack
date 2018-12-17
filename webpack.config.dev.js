@@ -1,5 +1,6 @@
 'use strict';
 
+const ManifestPlugin = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
@@ -32,14 +33,15 @@ module.exports = {
         }]
     },
     output: {
-        path: __dirname + '/web/dist/js',
-        filename: 'app.js'
+        path: __dirname + '/web/dist',
+        filename: 'js/app-[hash].js'
     },
     plugins: [
         new VueLoaderPlugin(),
+        new ManifestPlugin(),
         new MiniCssExtractPlugin({
-            filename: '../css/[name].css',
-            chunkFilename: '../css/[id].css'
+            filename: 'css/[name]-[hash].css',
+            chunkFilename: 'css/[id]-[hash].css'
         })
     ]
 };
