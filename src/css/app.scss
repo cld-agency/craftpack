@@ -9,13 +9,13 @@
  * You can see the styles here:
  * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
  */
- @import "tailwindcss/preflight";
+ @import "~tailwindcss/preflight";
 
 /**
  * This injects any component classes registered by plugins.
  *
  */
-@import 'tailwindcss/components';
+@import '~tailwindcss/components';
 
 /**
  * Here we add custom component classes; stuff we want loaded
@@ -32,7 +32,7 @@
  * config file.
  *
  */
-@import 'tailwindcss/utilities';
+@import '~tailwindcss/utilities';
 
 /**
  * Include styles for individual pages

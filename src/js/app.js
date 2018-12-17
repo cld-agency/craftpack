@@ -1,23 +1,17 @@
-import styles from '../css/app.scss';
+/**
+ * External
+ */
+import Vue from 'vue';
 
-// App main
-const main = async () => {
-    // Async load the vue module
-    const Vue = await import(/* webpackChunkName: "vue" */ 'vue');
-    // Create our vue instance
-    const vm = new Vue.default({
-        el: "#app",
-        components: {
-            'confetti': () => import(/* webpackChunkName: "confetti" */ '../vue/Confetti.vue'),
-        },
-        data: {
-        },
-        methods: {
-        },
-        mounted() {
-        },
+/**
+ * Internal
+ */
+import confetti from '../vue/Confetti.vue';
+import '../css/app.scss';
+
+if (document.getElementById('app')) {
+    new Vue({
+        el: '#app',
+        render: h => h(confetti),
     });
-};
-// Execute async function
-main().then( (value) => {
-});
+}
