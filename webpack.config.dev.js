@@ -1,5 +1,6 @@
 'use strict';
 
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
@@ -37,6 +38,7 @@ module.exports = {
         filename: 'js/app-[hash].js'
     },
     plugins: [
+        new DashboardPlugin(),
         new VueLoaderPlugin(),
         new ManifestPlugin(),
         new MiniCssExtractPlugin({
