@@ -10,10 +10,7 @@ return [
         'errorEntry' => '',
 
         // Manifest file names
-        'manifest' => [
-            'legacy' => 'manifest-legacy.json',
-            'modern' => 'manifest.json',
-        ],
+        'manifest' => [ 'modern' => 'manifest.json' ],
 
         // Public server config
         'server' => [
