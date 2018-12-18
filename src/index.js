@@ -1,9 +1,9 @@
 /**
- * Internal
+ * Load CSS
  */
-import './style.scss'; // These are our base styles that apply everywhere
+import './style.scss';
 
 /**
- * Loads all instances.
+ * Loads all JS instances
  */
 require('./instances/index');
