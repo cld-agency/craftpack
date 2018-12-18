@@ -6,8 +6,7 @@ import Vue from 'vue';
 /**
  * Internal
  */
-import confetti from '../vue/Confetti.vue';
-import '../css/app.scss';
+import confetti from './confetti.vue';
 
 if (document.getElementById('app')) {
     new Vue({

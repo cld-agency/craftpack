@@ -5,8 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
-    entry: './src/js/app.js',
-    mode: 'development',
+    mode: 'production',
     module: {
         rules: [{
             test: /\.vue$/,
@@ -20,14 +19,10 @@ module.exports = {
                 MiniCssExtractPlugin.loader,
                 {
                     loader: 'css-loader',
-                    options: {
-                        sourceMap: true,
-                    }
+                    options: { sourceMap: true }
                 }, {
                     loader: 'sass-loader',
-                    options: {
-                        sourceMap: true,
-                    }
+                    options: { sourceMap: true }
                 }
             ]
         }]
