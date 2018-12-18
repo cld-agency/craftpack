@@ -23,9 +23,9 @@
  * override them.
  *
  */
-@import 'css/components/global';
-@import 'css/components/typography';
-@import 'css/components/webfonts';
+@import 'components/global';
+@import 'components/typography';
+@import 'components/webfonts';
 
 /**
  * This injects all of Tailwind's utility classes, generated based on your
@@ -38,10 +38,10 @@
  * Include styles for individual pages
  *
  */
-@import 'css/pages/homepage';
+@import 'pages/homepage';
 
 /**
  * Include vendor css.
  *
  */
- @import 'css/vendor';
+ @import 'vendor';

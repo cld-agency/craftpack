@@ -5,20 +5,19 @@
 
     <title>{{ title ?? entry.title }}</title>
 
-    <!--# if expr="$HTTP_COOKIE=/critical\-css\=1/" -->
-        {{ craft.twigpack.includeCssModule("styles.css", false) }}
-    <!--# else -->
-        <script>
-            Cookie.set("critical-css", '1', { expires: "7D", secure: true });
-        </script>
-        {{ craft.twigpack.includeCriticalCssTags() }}
-
-        {{ craft.twigpack.includeCssModule("styles.css", true) }}
+    {% if craft.config.devMode %}
+        {# When developing we want to load the in-memory version for quick,
+            sans-reload developing. Make sure ot run `npm run dev`! #}
+        <script src="http://localhost:8080/dist/js/app.js"></script>
+    {% else %}
+        {# Elsewhere we'll have statically compiled asets. This inserts them
+            into the page from the manifest files. #}
+        {{ craft.twigpack.includeCssModule('app.css', true) }}
         {{ craft.twigpack.includeCssRelPreloadPolyfill() }}
-    <!--# endif -->
 
-    {{ craft.twigpack.includeSafariNomoduleFix() }}
-    {{ craft.twigpack.includeJsModule("app.js", true) }}
+        {{ craft.twigpack.includeSafariNomoduleFix() }}
+        {{ craft.twigpack.includeJsModule('app.js', true) }}
+    {% endif %}
 </head>
 <body>
     {% block content %}{% endblock %}

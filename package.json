@@ -1,26 +1,16 @@
 {
-    "name": "example-project",
-    "version": "1.0.0",
-    "description": "Example Project brand website",
-    "keywords": [
-        "Example",
-        "Keywords"
-    ],
-    "homepage": "https://github.com/example-developer/example-project",
-    "bugs": {
-        "email": "someone@example-developer.com",
-        "url": "https://github.com/example-developer/example-project/issues"
-    },
-    "license": "SEE LICENSE IN LICENSE.md",
+    "name": "craftpack",
     "author": {
-        "name": "Example Developer",
-        "email": "someone@example-developer.com",
-        "url": "https://example-developer.com"
+        "name": "CLD"
     },
+    "version": "1.0.0",
+    "description": "Craft + Webpack experiments",
+    "keywords": [],
+    "homepage": "https://github.com/byrobots/craftpack",
     "browser": "/web/index.php",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/example-developer/example-project.git"
+        "url": "git@github.com:byrobots/craftpack.git"
     },
     "private": true,
     "scripts": {
@@ -62,8 +52,6 @@
         "clean-webpack-plugin": "^0.1.19",
         "copy-webpack-plugin": "^4.5.2",
         "create-symlink-webpack-plugin": "^1.0.0",
-        "critical": "^1.3.4",
-        "critical-css-webpack-plugin": "^0.2.0",
         "css-loader": "^1.0.0",
         "cssnano": "^4.1.0",
         "dotenv": "^6.1.0",
@@ -102,7 +90,6 @@
         "vue-template-compiler": "^2.5.17",
         "webapp-webpack-plugin": "git+https://github.com/brunocodutra/webapp-webpack-plugin.git",
         "webpack": "^4.27.1",
-        "webpack-bundle-analyzer": "^3.0.2",
         "webpack-cli": "^3.1.1",
         "webpack-dashboard": "^2.0.0",
         "webpack-dev-server": "^3.1.9",

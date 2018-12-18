@@ -6,19 +6,18 @@ require('dotenv').config();
 // Webpack settings exports
 // noinspection WebpackConfigHighlighting
 module.exports = {
-    name: "Example Project",
-    copyright: "Example Company, Inc.",
+    name: "Craftpack",
+    copyright: "CLD",
     paths: {
         src: {
             base: "./src/",
             css: "./src/css/",
-            js: "./src/"
+            js: "./src/js/"
         },
         dist: {
             base: "./web/dist/",
             clean: [
                 "./img",
-                "./criticalcss",
                 "./css",
                 "./js"
             ]
@@ -26,32 +25,12 @@ module.exports = {
         templates: "./templates/"
     },
     urls: {
-        live: "https://example.com/",
-        local: "http://example.test/",
-        critical: "http://example.test/",
+        live: "https://craftpack.com/",
+        local: "http://craftpack.test/",
         publicPath: "/dist/"
     },
-    vars: {
-        cssName: "styles"
-    },
-    entries: {
-        "index": "index.js"
-    },
-    criticalCssConfig: {
-        base: "./web/dist/criticalcss/",
-        suffix: "_critical.min.css",
-        criticalHeight: 1200,
-        criticalWidth: 1200,
-        ampPrefix: "amp_",
-        ampCriticalHeight: 19200,
-        ampCriticalWidth: 600,
-        pages: [
-            {
-                url: "",
-                template: "index"
-            }
-        ]
-    },
+    vars: { cssName: "styles" },
+    entries: { "app": "app.js" },
     devServerConfig: {
         public: () => process.env.DEVSERVER_PUBLIC || "http://localhost:8080",
         host: () => process.env.DEVSERVER_HOST || "localhost",
@@ -59,17 +38,13 @@ module.exports = {
         port: () => process.env.DEVSERVER_PORT || 8080,
         https: () => process.env.DEVSERVER_HTTPS || false,
     },
-    manifestConfig: {
-        basePath: ""
-    },
+    manifestConfig: { basePath: "" },
     purgeCssConfig: {
         paths: [
             "./templates/**/*.{twig,html}",
             "./src/vue/**/*.{vue,html}"
         ],
-        whitelist: [
-            "./src/css/components/**/*.{css,pcss}"
-        ],
+        whitelist: [ "./src/css/components/**/*.css" ],
         whitelistPatterns: [],
         extensions: [
             "html",

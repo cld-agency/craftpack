@@ -102,9 +102,7 @@ const baseConfig = {
         publicPath: settings.urls.publicPath
     },
     resolve: {
-        alias: {
-            'vue$': 'vue/dist/vue.esm.js'
-        }
+        alias: { 'vue$': 'vue/dist/vue.esm.js' }
     },
     module: {
         rules: [
@@ -126,12 +124,8 @@ const legacyConfig = {
         ],
     },
     plugins: [
-        new CopyWebpackPlugin(
-            settings.copyWebpackConfig
-        ),
-        new ManifestPlugin(
-            configureManifest('manifest-legacy.json')
-        ),
+        new CopyWebpackPlugin(settings.copyWebpackConfig),
+        new ManifestPlugin(configureManifest('manifest-legacy.json')),
     ]
 };
 
@@ -143,9 +137,7 @@ const modernConfig = {
         ],
     },
     plugins: [
-        new ManifestPlugin(
-            configureManifest('manifest.json')
-        ),
+        new ManifestPlugin(configureManifest('manifest.json')),
     ]
 };
 
