@@ -96,28 +96,20 @@ const configureImageLoader = (buildType) => {
             use: [
                 {
                     loader: 'file-loader',
-                    options: {
-                        name: 'img/[name].[hash].[ext]'
-                    }
+                    options: { name: 'img/[name].[hash].[ext]' }
                 },
                 {
                     loader: 'img-loader',
                     options: {
                         plugins: [
-                            require('imagemin-gifsicle')({
-                                interlaced: true,
-                            }),
+                            require('imagemin-gifsicle')({ interlaced: true }),
                             require('imagemin-mozjpeg')({
                                 progressive: true,
                                 arithmetic: false,
                             }),
-                            require('imagemin-optipng')({
-                                optimizationLevel: 5,
-                            }),
+                            require('imagemin-optipng')({ optimizationLevel: 5 }),
                             require('imagemin-svgo')({
-                                plugins: [
-                                    {convertPathData: false},
-                                ]
+                                plugins: [{ convertPathData: false }]
                             }),
                         ]
                     }
@@ -144,9 +136,7 @@ const configureOptimization = (buildType) => {
                 }
             },
             minimizer: [
-                new TerserPlugin(
-                    configureTerser()
-                ),
+                new TerserPlugin(configureTerser()),
                 new OptimizeCSSAssetsPlugin({
                     cssProcessorOptions: {
                         map: {
@@ -163,9 +153,7 @@ const configureOptimization = (buildType) => {
     if (buildType === MODERN_CONFIG) {
         return {
             minimizer: [
-                new TerserPlugin(
-                    configureTerser()
-                ),
+                new TerserPlugin(configureTerser()),
             ]
         };
     }
@@ -196,8 +184,9 @@ const configureSassLoader = (_buildType) => {
 // Configure PurgeCSS
 const configurePurgeCss = () => {
     let paths = [];
+
     // Configure whitelist paths
-    for (const [key, value] of Object.entries(settings.purgeCssConfig.paths)) {
+    for (const [_key, value] of Object.entries(settings.purgeCssConfig.paths)) {
         paths.push(path.join(__dirname, value));
     }
 
@@ -245,9 +234,7 @@ module.exports = [
     merge(
         common.legacyConfig,
         {
-            output: {
-                filename: path.join('./js', '[name]-legacy.[chunkhash].js'),
-            },
+            output: { filename: path.join('./js', '[name]-legacy.[chunkhash].js') },
             mode: 'production',
             devtool: 'source-map',
             optimization: configureOptimization(LEGACY_CONFIG),
