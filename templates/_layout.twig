@@ -5,21 +5,15 @@
 
     <title>{{ title ?? entry.title }}</title>
 
-    {% if craft.config.devMode %}
-        {# When developing we want to load the in-memory version for quick,
-            sans-reload developing. Make sure ot run `npm run dev`! #}
-        <script src="http://localhost:8080/dist/js/app.js"></script>
-    {% else %}
-        {# Elsewhere we'll have statically compiled asets. This inserts them
-            into the page from the manifest files. #}
-        {{ craft.twigpack.includeCssModule('app.css', true) }}
-        {{ craft.twigpack.includeCssRelPreloadPolyfill() }}
+    {{ craft.twigpack.includeCssModule("styles.css", true) }}
+    {{ craft.twigpack.includeCssRelPreloadPolyfill() }}
 
-        {{ craft.twigpack.includeSafariNomoduleFix() }}
-        {{ craft.twigpack.includeJsModule('app.js', true) }}
-    {% endif %}
+    {{ craft.twigpack.includeSafariNomoduleFix() }}
+    {{ craft.twigpack.includeJsModule("app.js", true) }}
 </head>
 <body>
+    <h1>Dev Mode? {{ craft.config.devMode ? 'Yes' : 'No' }}</h1>
+
     {% block content %}{% endblock %}
 </body>
 </html>

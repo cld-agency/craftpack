@@ -1,5 +1,9 @@
 {
     "name": "craftpack",
+    "scripts": {
+        "dev": "webpack-dev-server --config webpack.dev.js",
+        "build": "webpack --config webpack.prod.js --progress --hide-modules"
+    },
     "author": {
         "name": "CLD"
     },
@@ -13,10 +17,6 @@
         "url": "git@github.com:byrobots/craftpack.git"
     },
     "private": true,
-    "scripts": {
-        "dev": "webpack-dev-server --config webpack.dev.js",
-        "build": "webpack --config webpack.prod.js --progress --hide-modules"
-    },
     "browserslist": {
         "production": [
             "> 1%",
@@ -89,7 +89,7 @@
         "vue-style-loader": "^4.1.2",
         "vue-template-compiler": "^2.5.17",
         "webapp-webpack-plugin": "git+https://github.com/brunocodutra/webapp-webpack-plugin.git",
-        "webpack": "^4.27.1",
+        "webpack": "^4.28.0",
         "webpack-cli": "^3.1.1",
         "webpack-dashboard": "^2.0.0",
         "webpack-dev-server": "^3.1.9",

@@ -21,21 +21,6 @@ const settings = require('./webpack.settings.js');
 // Configure the webpack-dev-server
 const configureDevServer = (buildType) => {
     return {
-        public: settings.devServerConfig.public(),
-        contentBase: path.resolve(__dirname, 'web'),
-        host: settings.devServerConfig.host(),
-        port: settings.devServerConfig.port(),
-        https: !!parseInt(settings.devServerConfig.https()),
-        quiet: true,
-        hot: true,
-        hotOnly: true,
-        overlay: true,
-        stats: 'errors-only',
-        watchOptions: {
-            poll: !!parseInt(settings.devServerConfig.poll()),
-            ignored: /node_modules/,
-        },
-        headers: { 'Access-Control-Allow-Origin': '*' },
         // Use sane to monitor all of the templates files and sub-directories
         before: (app, server) => {
             const watcher = sane(path.join(__dirname, 'web'), {
@@ -46,6 +31,21 @@ const configureDevServer = (buildType) => {
                 console.log('  File modified:', filePath);
                 server.sockWrite(server.sockets, "content-changed");
             });
+        },
+        contentBase: path.resolve(__dirname, settings.paths.templates),
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        host: settings.devServerConfig.host(),
+        hot: true,
+        hotOnly: true,
+        https: !!parseInt(settings.devServerConfig.https()),
+        overlay: true,
+        port: settings.devServerConfig.port(),
+        public: settings.devServerConfig.public(),
+        quiet: true,
+        stats: 'errors-only',
+        watchOptions: {
+            poll: !!parseInt(settings.devServerConfig.poll()),
+            ignored: /node_modules/,
         },
     };
 };
