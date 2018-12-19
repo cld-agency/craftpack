@@ -5,13 +5,13 @@ const MODERN_CONFIG = 'modern';
 // node modules
 const merge = require('webpack-merge');
 const path = require('path');
-const sane = require('sane');
 const webpack = require('webpack');
 
 // webpack plugins
 const Dashboard = require('webpack-dashboard');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const dashboard = new Dashboard();
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 // config files
 const common = require('./webpack.common.js');
@@ -19,19 +19,8 @@ const pkg = require('./package.json');
 const settings = require('./webpack.settings.js');
 
 // Configure the webpack-dev-server
-const configureDevServer = (buildType) => {
+const configureDevServer = (_buildType) => {
     return {
-        // Use sane to monitor all of the templates files and sub-directories
-        before: (app, server) => {
-            const watcher = sane(path.join(__dirname, 'web'), {
-                glob: ['**/*'],
-                poll: !!parseInt(settings.devServerConfig.poll()),
-            });
-            watcher.on('change', function(filePath, root, stat) {
-                console.log('  File modified:', filePath);
-                server.sockWrite(server.sockets, "content-changed");
-            });
-        },
         contentBase: path.resolve(__dirname, settings.paths.templates),
         headers: { 'Access-Control-Allow-Origin': '*' },
         host: settings.devServerConfig.host(),
@@ -58,9 +47,7 @@ const configureImageLoader = (buildType) => {
             use: [
                 {
                     loader: 'file-loader',
-                    options: {
-                        name: 'img/[name].[hash].[ext]'
-                    }
+                    options: { name: 'img/[name].[hash].[ext]' }
                 }
             ]
         };
@@ -99,9 +86,7 @@ const configureSassCssLoader = (buildType) => {
                         importLoaders: 2,
                         sourceMap: true
                     }
-                },
-                { loader: 'resolve-url-loader' },
-                {
+                }, {
                     loader: 'sass-loader',
                     options: { sourceMap: true }
                 }
@@ -129,6 +114,7 @@ module.exports = [
                 ],
             },
             plugins: [
+                new HardSourceWebpackPlugin(),
                 new webpack.HotModuleReplacementPlugin(),
             ],
         }
@@ -150,8 +136,9 @@ module.exports = [
                 ],
             },
             plugins: [
-                new webpack.HotModuleReplacementPlugin(),
                 new DashboardPlugin(dashboard.setData),
+                new HardSourceWebpackPlugin(),
+                new webpack.HotModuleReplacementPlugin(),
             ],
         }
     ),
