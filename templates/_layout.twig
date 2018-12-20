@@ -5,9 +5,17 @@
 
     <title>{{ title ?? entry.title }}</title>
 
+    {# Compiled Favicons. Only does stuff in production environments as this
+        isn't compiled when running locally. #}
+    {{ craft.twigpack.includeFileFromManifest('webapp.html') }}
+
+    {# CSS from the Manifest file in production, or webpack-dev-server in the
+        development environment. #}
     {{ craft.twigpack.includeCssModule("styles.css", true) }}
     {{ craft.twigpack.includeCssRelPreloadPolyfill() }}
 
+    {# JS from the Manifest. In production this will include both modern and
+        legacy versions. #}
     {{ craft.twigpack.includeSafariNomoduleFix() }}
     {{ craft.twigpack.includeJsModule("app.js", true) }}
 </head>
