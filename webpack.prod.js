@@ -1,8 +1,8 @@
-// webpack.prod.js - production builds
+// Production builds
 const LEGACY_CONFIG = 'legacy';
 const MODERN_CONFIG = 'modern';
 
-// node modules
+// Node modules
 const git = require('git-rev-sync');
 const glob = require('glob-all');
 const merge = require('webpack-merge');
@@ -10,7 +10,7 @@ const moment = require('moment');
 const path = require('path');
 const webpack = require('webpack');
 
-// webpack plugins
+// Webpack plugins
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CreateSymlinkPlugin = require('create-symlink-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -23,22 +23,28 @@ const TerserPlugin = require('terser-webpack-plugin');
 const WebappWebpackPlugin = require('webapp-webpack-plugin');
 const WhitelisterPlugin = require('purgecss-whitelister');
 
-// config files
+// Configs
 const common = require('./webpack.common.js');
 const pkg = require('./package.json');
 const settings = require('./webpack.settings.js');
 
-// Custom PurgeCSS extractor for Tailwind that allows special characters in
-// class names.
-//
-// https://github.com/FullHuman/purgecss#extractor
+/**
+ * Custom PurgeCSS extractor for Tailwind that allows special characters in
+ * class names.
+ *
+ * @link https://github.com/FullHuman/purgecss#extractor
+ */
 class TailwindExtractor {
     static extract(content) {
         return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
     }
 }
 
-// Configure file banner
+/**
+ * Template for the file banner that will be placed in our compiled assets.
+ *
+ * @return {Object}
+ */
 const configureBanner = () => {
     return {
         banner: [
@@ -57,7 +63,11 @@ const configureBanner = () => {
     };
 };
 
-// Configure Clean webpack
+/**
+ * Remove old build folder before building the new ones.
+ *
+ * @return {Object}
+ */
 const configureCleanWebpack = () => {
     return {
         root: path.resolve(__dirname, settings.paths.dist.base),
@@ -66,7 +76,11 @@ const configureCleanWebpack = () => {
     };
 };
 
-// Configure Html webpack
+/**
+ * Used to build the HTML for all our favicons.
+ *
+ * @return {Object}
+ */
 const configureHtml = () => {
     return {
         templateContent: '',
@@ -75,7 +89,14 @@ const configureHtml = () => {
     };
 };
 
-// Configure Image loader
+/**
+ * Minifies images that are part of the Webpack project. Won't minify images
+ * in the CMS.
+ *
+ * @param {String} buildType
+ *
+ * @return {Object}
+ */
 const configureImageLoader = (buildType) => {
     if (buildType === LEGACY_CONFIG) {
         return {
@@ -83,13 +104,12 @@ const configureImageLoader = (buildType) => {
             use: [
                 {
                     loader: 'file-loader',
-                    options: {
-                        name: 'img/[name].[hash].[ext]'
-                    }
+                    options: { name: 'img/[name].[hash].[ext]' }
                 }
             ]
         };
     }
+
     if (buildType === MODERN_CONFIG) {
         return {
             test: /\.(png|jpe?g|gif|svg|webp)$/i,
@@ -119,7 +139,13 @@ const configureImageLoader = (buildType) => {
     }
 };
 
-// Configure optimization
+/**
+ * Configures optimisations.
+ *
+ * @param {String} buildType
+ *
+ * @return {Object}
+ */
 const configureOptimization = (buildType) => {
     if (buildType === LEGACY_CONFIG) {
         return {
@@ -150,16 +176,21 @@ const configureOptimization = (buildType) => {
             ]
         };
     }
+
     if (buildType === MODERN_CONFIG) {
         return {
-            minimizer: [
-                new TerserPlugin(configureTerser()),
-            ]
+            minimizer: [ new TerserPlugin(configureTerser()) ]
         };
     }
 };
 
-// Configure Postcss loader
+/**
+ * Configures the Sass to CSS compilation.
+ *
+ * @param  {String} _buildType
+ *
+ * @return {Object}
+ */
 const configureSassLoader = (_buildType) => {
     return {
         test: /\.s[c|a]ss$/,
@@ -181,7 +212,12 @@ const configureSassLoader = (_buildType) => {
     };
 };
 
-// Configure PurgeCSS
+/**
+ * PurgeCSS removes un-used CSS rules. Checks against the Vue folder and the
+ * symlinked templates folder.
+ *
+ * @return {Object}
+ */
 const configurePurgeCss = () => {
     let paths = [];
 
@@ -203,7 +239,12 @@ const configurePurgeCss = () => {
     };
 };
 
-// Configure terser
+/**
+ * Terser squishes ES6 JavaScript.
+ * @link https://github.com/terser-js/terser
+ *
+ * @return {object}
+ */
 const configureTerser = () => {
     return {
         cache: true,
@@ -212,7 +253,11 @@ const configureTerser = () => {
     };
 };
 
-// Configure Webapp webpack
+/**
+ * Generates all the Favicons we'll be needing.
+ *
+ * @return {Object}
+ */
 const configureWebapp = () => {
     return {
         logo: settings.webappConfig.logo,
@@ -229,7 +274,11 @@ const configureWebapp = () => {
     };
 };
 
-// Production module exports
+/**
+ * The actual module export. Combines legacy and modern builds.
+ *
+ * @type {Array}
+ */
 module.exports = [
     merge(
         common.legacyConfig,

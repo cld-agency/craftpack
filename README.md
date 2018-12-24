@@ -9,6 +9,7 @@ to create a base Craft CMS project with Webpack goodness.
 A WIP list.
 
 - [ ] [HMR](https://webpack.js.org/concepts/hot-module-replacement/) in MAMP
+- [ ] Autoprefixing
 - [ ] JavaScript linting
 - [ ] Sass linting
 - [x] [HMR](https://webpack.js.org/concepts/hot-module-replacement/) in Vagrant
