@@ -29,6 +29,7 @@ const settings = require('./webpack.settings.js');
 const configureDevServer = (_buildType) => {
     return {
         contentBase: path.resolve(__dirname, settings.paths.templates),
+        disableHostCheck: true,
         headers: { 'Access-Control-Allow-Origin': '*' },
         host: settings.devServerConfig.host(),
         hot: true,
