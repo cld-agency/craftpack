@@ -9,6 +9,6 @@ body { background-color: brown; }
 .to-test-purgecss { background-color: #f00; }
 
 /**
- * Styles that should be pre-fixed to test autoprefixer.
+ * Style that should be pre-fixed to test autoprefixer.
  */
 ::placeholder { color: blue; }
