@@ -29,9 +29,7 @@ const configureBabelLoader = (browserList) => {
                         '@babel/preset-env', {
                         modules: false,
                         useBuiltIns: 'entry',
-                        targets: {
-                            browsers: browserList,
-                        },
+                        targets: { browsers: browserList },
                     }
                     ],
                 ],
@@ -119,9 +117,7 @@ const baseConfig = {
 // Legacy webpack config
 const legacyConfig = {
     module: {
-        rules: [
-            configureBabelLoader(Object.values(pkg.browserslist.legacyBrowsers)),
-        ],
+        rules: [ configureBabelLoader(Object.values(pkg.browserslist)) ],
     },
     plugins: [
         new CopyWebpackPlugin(settings.copyWebpackConfig),
@@ -133,7 +129,7 @@ const legacyConfig = {
 const modernConfig = {
     module: {
         rules: [
-            configureBabelLoader(Object.values(pkg.browserslist.modernBrowsers)),
+            configureBabelLoader(Object.values(pkg.browserslist)),
         ],
     },
     plugins: [

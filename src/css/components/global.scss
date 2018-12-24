@@ -1,11 +1,14 @@
 /**
  * Project-wide styles
  */
-
 body { background-color: brown; }
 
 /**
  * Un-used class to test PurgeCSS.
  */
-
 .to-test-purgecss { background-color: #f00; }
+
+/**
+ * Styles that should be pre-fixed to test autoprefixer.
+ */
+::placeholder { color: blue; }

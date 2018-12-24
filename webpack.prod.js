@@ -26,6 +26,7 @@ const WhitelisterPlugin = require('purgecss-whitelister');
 // Configs
 const common = require('./webpack.common.js');
 const pkg = require('./package.json');
+const postcss = require('./postcss.config.js');
 const settings = require('./webpack.settings.js');
 
 /**
@@ -200,8 +201,11 @@ const configureSassLoader = (_buildType) => {
                 loader: 'css-loader',
                 options: {
                     importLoaders: 2,
-                    sourceMap: true
+                    sourceMap: true,
                 }
+            }, {
+                loader: 'postcss-loader',
+                options: postcss,
             },
             { loader: 'resolve-url-loader' },
             {
