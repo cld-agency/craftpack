@@ -10,7 +10,6 @@ const merge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const WebpackNotifierPlugin = require('webpack-notifier');
 
 // config files
 const pkg = require('./package.json');
@@ -27,19 +26,18 @@ const configureBabelLoader = (browserList) => {
                 presets: [
                     [
                         '@babel/preset-env', {
-                        modules: false,
-                        useBuiltIns: 'entry',
-                        targets: { browsers: browserList },
-                    }
+                        	modules: false,
+                        	useBuiltIns: 'entry',
+                        	targets: { browsers: browserList },
+                    	}
                     ],
                 ],
                 plugins: [
-                    '@babel/plugin-syntax-dynamic-import',
                     [
                         "@babel/plugin-transform-runtime", {
-                        "regenerator": true
-                    }
-                    ]
+                        	"regenerator": true
+                    	}
+					]
                 ],
             },
         },
@@ -108,10 +106,7 @@ const baseConfig = {
             configureVueLoader(),
         ],
     },
-    plugins: [
-        new WebpackNotifierPlugin({title: 'Webpack', excludeWarnings: true, alwaysNotify: true}),
-        new VueLoaderPlugin(),
-    ]
+    plugins: [ new VueLoaderPlugin() ]
 };
 
 // Legacy webpack config
