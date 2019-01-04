@@ -9,7 +9,6 @@ to create a base Craft CMS project with Webpack goodness.
 A WIP list.
 
 - [ ] [HMR](https://webpack.js.org/concepts/hot-module-replacement/) in MAMP
-- [ ] JavaScript linting
 - [ ] Sass linting
 - [x] [HMR](https://webpack.js.org/concepts/hot-module-replacement/) in Vagrant
 - [x] Asset manifests
@@ -18,6 +17,7 @@ A WIP list.
 - [x] CSS Minification
 - [x] ES6 support
 - [x] Image minification for repository images
+- [x] JavaScript linting
 - [x] Modern and Legacy builds in production
 - [x] PurgeCSS
 - [x] Sass

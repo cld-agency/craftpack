@@ -106,6 +106,20 @@ const configureSassCssLoader = (buildType) => {
 };
 
 /**
+ * Configure ESLint.
+ *
+ * @return {Object}
+ */
+const configureEsLint = () => {
+    return {
+        enforce: "pre",
+        exclude: /node_modules/,
+        test: /\.js$/,
+        use: [ "eslint-loader" ],
+    };
+};
+
+/**
  * Bring it all together.
  *
  * @type {Array}
@@ -125,6 +139,7 @@ module.exports = [
                 rules: [
                     configureSassCssLoader(LEGACY_CONFIG),
                     configureImageLoader(LEGACY_CONFIG),
+                    configureEsLint(),
                 ],
             },
             plugins: [
@@ -147,6 +162,7 @@ module.exports = [
                 rules: [
                     configureSassCssLoader(MODERN_CONFIG),
                     configureImageLoader(MODERN_CONFIG),
+                    configureEsLint(),
                 ],
             },
             plugins: [
