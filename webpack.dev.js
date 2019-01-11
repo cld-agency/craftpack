@@ -12,6 +12,7 @@ const Dashboard = require('webpack-dashboard');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const dashboard = new Dashboard();
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 // Configuration
 const common = require('./webpack.common.js');
@@ -168,6 +169,7 @@ module.exports = [
             plugins: [
                 new DashboardPlugin(dashboard.setData),
                 new HardSourceWebpackPlugin(),
+				new StyleLintPlugin({ context: './src/css', syntax: 'scss' }),
                 new webpack.HotModuleReplacementPlugin(),
             ],
         }
