@@ -27,17 +27,19 @@ A WIP list.
 ## Instructions
 ### Development/Local Environments
 #### Developing in [Homestead](https://laravel.com/docs/5.7/homestead)
-*Preface*: An assumption has been made the the Craftpack project has been
-cloned into `~/Code/craftpack` - Vagrant needs to know where the project is so
-for consistencies sake I've set it to there.
+##### Preface
+Homestead's route directory is assumed to be ~/Code and an assumption has been
+made that the Craftpack project has been cloned into `~/Code/craftpack`.
+
+Update paths accoridngly if your set-up is different.
 
 ##### Installation
 1. `cd ~/Code && git clone git@github.com:cld-agency/craftpack.git` - Jump into
 the code directory and clone the project.
 2. `composer install` - Installs all PHP dependencies as well as Homestead.
-3. `vagrant up` - Brings up the Homestead environment.
+3. `cd ../ && vagrant up` - Brings up the Homestead environment.
 4. `vagrant ssh` - SSH into Homestead. Frontend assets *must* be installed there.
-5. `cd code && npm install` - Installs frontend assets.
+5. `cd code/craftpack && npm install` - Installs frontend assets.
 6. `cp .env.example .env` - The environment example is configured for Homestead
 out of the box.
 7. Populate the `SECURITY_KEY` value in the `.env` file. I use the
