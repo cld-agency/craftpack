@@ -1,8 +1,8 @@
 {
     "name": "craftpack",
     "scripts": {
-        "dev": "webpack-dev-server --config webpack.dev.js",
-        "build": "webpack --config webpack.prod.js --progress --hide-modules"
+        "build": "webpack --config webpack.prod.js --progress --hide-modules",
+        "start": "webpack-dev-server --config webpack.dev.js"
     },
     "author": {
         "name": "CLD"
@@ -66,6 +66,7 @@
         "save-remote-file-webpack-plugin": "^1.0.0",
         "style-loader": "^0.23.0",
         "stylelint": "^9.9.0",
+        "stylelint-config-standard": "^18.2.0",
         "stylelint-webpack-plugin": "^0.10.5",
         "symlink-webpack-plugin": "^0.0.4",
         "terser-webpack-plugin": "^1.2.1",
@@ -75,7 +76,6 @@
         "webapp-webpack-plugin": "git+https://github.com/brunocodutra/webapp-webpack-plugin.git",
         "webpack": "^4.28.4",
         "webpack-cli": "^3.2.1",
-        "webpack-dashboard": "^2.0.0",
         "webpack-dev-server": "^3.1.14",
         "webpack-manifest-plugin": "^2.0.4",
         "webpack-merge": "^4.2.1"

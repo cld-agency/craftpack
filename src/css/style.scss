@@ -9,7 +9,7 @@
  * You can see the styles here:
  * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
  */
- @import "~tailwindcss/preflight";
+@import "~tailwindcss/preflight";
 
 /**
  * This injects any component classes registered by plugins.
@@ -44,4 +44,4 @@
  * Include vendor css.
  *
  */
- @import 'vendor';
+@import 'vendor';

@@ -9,7 +9,6 @@ to create a base Craft CMS project with Webpack goodness.
 A WIP list.
 
 - [ ] [HMR](https://webpack.js.org/concepts/hot-module-replacement/) in MAMP
-- [ ] Sass linting
 - [x] [HMR](https://webpack.js.org/concepts/hot-module-replacement/) in Vagrant
 - [x] Asset manifests
 - [x] Automatic generation and inclusion of Favicon HTML
@@ -21,6 +20,7 @@ A WIP list.
 - [x] Modern and Legacy builds in production
 - [x] PurgeCSS
 - [x] Sass
+- [x] Sass linting
 - [x] Tailwind
 - [x] Vue.js
 
@@ -53,7 +53,7 @@ the purposes of this demo.
 
 ##### Usage
 Once you have completed installation you can activate the development build
-tasks by running `npm run dev`. This must be done from within Homestead, so
+tasks by running `npm start`. This must be done from within Homestead, so
 `vagrant ssh` in, `cd code` and then run the dev command. The initial run can
 take a little while to complete, but progress will be displayed.
 

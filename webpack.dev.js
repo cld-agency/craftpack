@@ -8,9 +8,6 @@ const path = require('path');
 const webpack = require('webpack');
 
 // Webpack plugins
-const Dashboard = require('webpack-dashboard');
-const DashboardPlugin = require('webpack-dashboard/plugin');
-const dashboard = new Dashboard();
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 
@@ -39,7 +36,6 @@ const configureDevServer = (_buildType) => {
         overlay: true,
         port: settings.devServerConfig.port(),
         public: settings.devServerConfig.public(),
-        quiet: true,
         stats: 'errors-only',
         watchOptions: {
             poll: !!parseInt(settings.devServerConfig.poll()),
@@ -145,6 +141,10 @@ module.exports = [
             },
             plugins: [
                 new HardSourceWebpackPlugin(),
+				new StyleLintPlugin({
+					configFile: './.stylelintrc.json',
+					context: './src/css',
+				}),
                 new webpack.HotModuleReplacementPlugin(),
             ],
         }
@@ -167,9 +167,11 @@ module.exports = [
                 ],
             },
             plugins: [
-                new DashboardPlugin(dashboard.setData),
                 new HardSourceWebpackPlugin(),
-				new StyleLintPlugin({ context: './src/css', syntax: 'scss' }),
+				new StyleLintPlugin({
+					configFile: './.stylelintrc.json',
+					context: './src/css',
+				}),
                 new webpack.HotModuleReplacementPlugin(),
             ],
         }
