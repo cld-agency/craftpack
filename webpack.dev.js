@@ -117,6 +117,18 @@ const configureEsLint = () => {
 };
 
 /**
+ * Configure Style Lint.
+ *
+ * @return {Object}
+ */
+const configureStyleLint = () => {
+	return {
+		configFile: './.stylelintrc.json',
+		context: './src/css',
+	};
+};
+
+/**
  * Bring it all together.
  *
  * @type {Array}
@@ -141,10 +153,7 @@ module.exports = [
             },
             plugins: [
                 new HardSourceWebpackPlugin(),
-				new StyleLintPlugin({
-					configFile: './.stylelintrc.json',
-					context: './src/css',
-				}),
+				new StyleLintPlugin(configureStyleLint()),
                 new webpack.HotModuleReplacementPlugin(),
             ],
         }
@@ -168,10 +177,7 @@ module.exports = [
             },
             plugins: [
                 new HardSourceWebpackPlugin(),
-				new StyleLintPlugin({
-					configFile: './.stylelintrc.json',
-					context: './src/css',
-				}),
+				new StyleLintPlugin(configureStyleLint()),
                 new webpack.HotModuleReplacementPlugin(),
             ],
         }
