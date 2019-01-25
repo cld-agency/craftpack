@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ title ?? entry.title }}</title>
 
@@ -9,15 +11,15 @@
         isn't compiled when running locally. #}
     {{ craft.twigpack.includeFileFromManifest('webapp.html') }}
 
-    {# CSS from the Manifest file in production, or webpack-dev-server in the
-        development environment. #}
-    {{ craft.twigpack.includeCssModule("app.css", true) }}
-    {{ craft.twigpack.includeCssRelPreloadPolyfill() }}
-
-    {# JS from the Manifest. In production this will include both modern and
+	{# JS from the Manifest. In production this will include both modern and
         legacy versions. #}
     {{ craft.twigpack.includeSafariNomoduleFix() }}
-    {{ craft.twigpack.includeJsModule("app.js", true) }}
+    {{ craft.twigpack.includeJsModule('app.js', true) }}
+
+    {# CSS from the Manifest file in production, or webpack-dev-server in the
+        development environment. #}
+    {{ craft.twigpack.includeCssModule('app.css', true) }}
+    {{ craft.twigpack.includeCssRelPreloadPolyfill() }}
 </head>
 <body>
     <h1>Dev Mode? {{ craft.config.devMode ? 'Yes' : 'No' }}</h1>
