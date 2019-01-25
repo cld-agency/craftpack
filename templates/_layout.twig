@@ -11,7 +11,7 @@
 
     {# CSS from the Manifest file in production, or webpack-dev-server in the
         development environment. #}
-    {{ craft.twigpack.includeCssModule("styles.css", true) }}
+    {{ craft.twigpack.includeCssModule("app.css", true) }}
     {{ craft.twigpack.includeCssRelPreloadPolyfill() }}
 
     {# JS from the Manifest. In production this will include both modern and

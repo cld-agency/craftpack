@@ -35,9 +35,10 @@ const configureBabelLoader = (browserList) => {
 				plugins: [
 					[
 						'@babel/plugin-transform-runtime', {
-							'regenerator': true
+							'regenerator': true,
 						}
-					]
+					],
+					[ '@babel/plugin-syntax-dynamic-import' ],
 				],
 			},
 		},
@@ -47,6 +48,14 @@ const configureBabelLoader = (browserList) => {
 // Configure Entries
 const configureEntries = () => {
 	let entries = {};
+
+	// Add Promise and Iterator polyfills.
+	// See: https://babeljs.io/docs/en/babel-plugin-syntax-dynamic-import#working-with-webpack-and-babel-preset-env
+	// TODO: This will include the polyfills in our modern build. Can this
+	//       function be tweaked to accept a modern/legacy argument?
+	entries['es6.promise'] = 'core-js/modules/es6.promise';
+	entries['es6.array.iterator'] = 'core-js/modules/es6.array.iterator';
+
 	for (const [key, value] of Object.entries(settings.entries)) {
 		entries[key] = path.resolve(__dirname, settings.paths.src.js + value);
 	}
@@ -92,8 +101,9 @@ const baseConfig = {
 	name: pkg.name,
 	entry: configureEntries(),
 	output: {
+		chunkFilename: 'js/bundles/[name].bundle.[chunkhash].js',
 		path: path.resolve(__dirname, settings.paths.dist.base),
-		publicPath: settings.urls.publicPath
+		publicPath: settings.urls.publicPath,
 	},
 	resolve: {
 		alias: { 'vue$': 'vue/dist/vue.esm.js' },
