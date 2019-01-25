@@ -25,23 +25,23 @@ const settings = require('./webpack.settings.js');
  * @return {Object}
  */
 const configureDevServer = (_buildType) => {
-    return {
-        contentBase: path.resolve(__dirname, settings.paths.templates),
-        disableHostCheck: true,
-        headers: { 'Access-Control-Allow-Origin': '*' },
-        host: settings.devServerConfig.host(),
-        hot: true,
-        https: !!parseInt(settings.devServerConfig.https()),
+	return {
+		contentBase: path.resolve(__dirname, settings.paths.templates),
+		disableHostCheck: true,
+		headers: { 'Access-Control-Allow-Origin': '*' },
+		host: settings.devServerConfig.host(),
+		hot: true,
+		https: !!parseInt(settings.devServerConfig.https()),
 		inline: true,
-        overlay: true,
-        port: settings.devServerConfig.port(),
-        public: settings.devServerConfig.public(),
-        stats: 'errors-only',
-        watchOptions: {
-            poll: !!parseInt(settings.devServerConfig.poll()),
-            ignored: /node_modules/,
-        },
-    };
+		overlay: true,
+		port: settings.devServerConfig.port(),
+		public: settings.devServerConfig.public(),
+		stats: 'errors-only',
+		watchOptions: {
+			poll: !!parseInt(settings.devServerConfig.poll()),
+			ignored: /node_modules/,
+		},
+	};
 };
 
 /**
@@ -53,15 +53,15 @@ const configureDevServer = (_buildType) => {
  * @return {Object}
  */
 const configureImageLoader = (_buildType) => {
-    return {
-        test: /\.(png|jpe?g|gif|svg|webp)$/i,
-        use: [
-            {
-                loader: 'file-loader',
-                options: { name: 'img/[name].[hash].[ext]' }
-            }
-        ]
-    };
+	return {
+		test: /\.(png|jpe?g|gif|svg|webp)$/i,
+		use: [
+			{
+				loader: 'file-loader',
+				options: { name: 'img/[name].[hash].[ext]' }
+			}
+		]
+	};
 };
 
 /**
@@ -73,33 +73,33 @@ const configureImageLoader = (_buildType) => {
  * @return {Object}
  */
 const configureSassCssLoader = (buildType) => {
-    // Don't generate CSS for the legacy config in development
-    if (buildType === LEGACY_CONFIG) {
-        return {
-            test: /\.s[c|a]ss$/,
-            loader: 'ignore-loader'
-        };
-    }
+	// Don't generate CSS for the legacy config in development
+	if (buildType === LEGACY_CONFIG) {
+		return {
+			test: /\.s[c|a]ss$/,
+			loader: 'ignore-loader'
+		};
+	}
 
-    if (buildType === MODERN_CONFIG) {
-        return {
-            test: /\.s[c|a]ss$/,
-            use: [
-                { loader: 'style-loader' },
-                { loader: 'vue-style-loader' },
-                {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 2,
-                        sourceMap: true
-                    }
-                }, {
-                    loader: 'sass-loader',
-                    options: { sourceMap: true }
-                }
-            ]
-        };
-    }
+	if (buildType === MODERN_CONFIG) {
+		return {
+			test: /\.s[c|a]ss$/,
+			use: [
+				{ loader: 'style-loader' },
+				{ loader: 'vue-style-loader' },
+				{
+					loader: 'css-loader',
+					options: {
+						importLoaders: 2,
+						sourceMap: true
+					}
+				}, {
+					loader: 'sass-loader',
+					options: { sourceMap: true }
+				}
+			]
+		};
+	}
 };
 
 /**
@@ -108,12 +108,12 @@ const configureSassCssLoader = (buildType) => {
  * @return {Object}
  */
 const configureEsLint = () => {
-    return {
-        enforce: "pre",
-        exclude: /node_modules/,
-        test: /\.js$/,
-        use: [ "eslint-loader" ],
-    };
+	return {
+		enforce: "pre",
+		exclude: /node_modules/,
+		test: /\.js$/,
+		use: [ "eslint-loader" ],
+	};
 };
 
 /**
@@ -134,52 +134,52 @@ const configureStyleLint = () => {
  * @type {Array}
  */
 module.exports = [
-    merge(
-        common.legacyConfig,
-        {
-            output: {
-                filename: path.join('./js', '[name]-legacy.[hash].js'),
-                publicPath: settings.devServerConfig.public() + '/',
-            },
-            mode: 'development',
-            devtool: 'inline-source-map',
-            devServer: configureDevServer(LEGACY_CONFIG),
-            module: {
-                rules: [
-                    configureSassCssLoader(LEGACY_CONFIG),
-                    configureImageLoader(LEGACY_CONFIG),
-                    configureEsLint(),
-                ],
-            },
-            plugins: [
-                new HardSourceWebpackPlugin(),
+	merge(
+		common.legacyConfig,
+		{
+			output: {
+				filename: path.join('./js', '[name]-legacy.[hash].js'),
+				publicPath: settings.devServerConfig.public() + '/',
+			},
+			mode: 'development',
+			devtool: 'inline-source-map',
+			devServer: configureDevServer(LEGACY_CONFIG),
+			module: {
+				rules: [
+					configureSassCssLoader(LEGACY_CONFIG),
+					configureImageLoader(LEGACY_CONFIG),
+					configureEsLint(),
+				],
+			},
+			plugins: [
+				new HardSourceWebpackPlugin(),
 				new StyleLintPlugin(configureStyleLint()),
-                new webpack.HotModuleReplacementPlugin(),
-            ],
-        }
-    ),
-    merge(
-        common.modernConfig,
-        {
-            output: {
-                filename: path.join('./js', '[name].[hash].js'),
-                publicPath: settings.devServerConfig.public() + '/',
-            },
-            mode: 'development',
-            devtool: 'inline-source-map',
-            devServer: configureDevServer(MODERN_CONFIG),
-            module: {
-                rules: [
-                    configureSassCssLoader(MODERN_CONFIG),
-                    configureImageLoader(MODERN_CONFIG),
-                    configureEsLint(),
-                ],
-            },
-            plugins: [
-                new HardSourceWebpackPlugin(),
+				new webpack.HotModuleReplacementPlugin(),
+			],
+		}
+	),
+	merge(
+		common.modernConfig,
+		{
+			output: {
+				filename: path.join('./js', '[name].[hash].js'),
+				publicPath: settings.devServerConfig.public() + '/',
+			},
+			mode: 'development',
+			devtool: 'inline-source-map',
+			devServer: configureDevServer(MODERN_CONFIG),
+			module: {
+				rules: [
+					configureSassCssLoader(MODERN_CONFIG),
+					configureImageLoader(MODERN_CONFIG),
+					configureEsLint(),
+				],
+			},
+			plugins: [
+				new HardSourceWebpackPlugin(),
 				new StyleLintPlugin(configureStyleLint()),
-                new webpack.HotModuleReplacementPlugin(),
-            ],
-        }
-    ),
+				new webpack.HotModuleReplacementPlugin(),
+			],
+		}
+	),
 ];

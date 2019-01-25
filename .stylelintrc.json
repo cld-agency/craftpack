@@ -1,7 +1,7 @@
 {
-    "extends": "stylelint-config-standard",
-    "rules": {
+	"extends": "stylelint-config-standard",
+	"rules": {
 		"comment-whitespace-inside": "always",
-        "indentation": "tab"
-    }
+		"indentation": "tab"
+	}
 }

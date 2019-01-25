@@ -4,10 +4,10 @@
  * @type {Object}
  */
 module.exports = {
-    plugins: [
-        require('tailwindcss')('./tailwind.config.js'),
-        require('autoprefixer'),
-    ],
-    sourceMap: true,
-    syntax: 'postcss-scss',
+	plugins: [
+		require('tailwindcss')('./tailwind.config.js'),
+		require('autoprefixer'),
+	],
+	sourceMap: true,
+	syntax: 'postcss-scss',
 };
