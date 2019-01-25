@@ -114,7 +114,10 @@ const baseConfig = {
 			configureVueLoader(),
 		],
 	},
-	plugins: [ new VueLoaderPlugin() ]
+	plugins: [ new VueLoaderPlugin() ],
+	optimization: {
+		splitChunks: { chunks: 'all' },
+	},
 };
 
 // Legacy webpack config
