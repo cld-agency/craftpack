@@ -34,8 +34,8 @@ const configureBabelLoader = (browserList) => {
 				],
 				plugins: [
 					[
-						"@babel/plugin-transform-runtime", {
-							"regenerator": true
+						'@babel/plugin-transform-runtime', {
+							'regenerator': true
 						}
 					]
 				],
@@ -61,9 +61,7 @@ const configureFontLoader = () => {
 		use: [
 			{
 				loader: 'file-loader',
-				options: {
-					name: 'fonts/[name].[ext]'
-				}
+				options: { name: 'fonts/[name].[ext]' }
 			}
 		]
 	};
@@ -85,7 +83,7 @@ const configureManifest = (fileName) => {
 const configureVueLoader = () => {
 	return {
 		test: /\.vue$/,
-		loader: 'vue-loader'
+		loader: 'vue-loader',
 	};
 };
 
@@ -98,7 +96,7 @@ const baseConfig = {
 		publicPath: settings.urls.publicPath
 	},
 	resolve: {
-		alias: { 'vue$': 'vue/dist/vue.esm.js' }
+		alias: { 'vue$': 'vue/dist/vue.esm.js' },
 	},
 	module: {
 		rules: [
@@ -117,7 +115,7 @@ const legacyConfig = {
 	plugins: [
 		new CopyWebpackPlugin(settings.copyWebpackConfig),
 		new ManifestPlugin(configureManifest('manifest-legacy.json')),
-	]
+	],
 };
 
 // Modern webpack config
@@ -129,18 +127,12 @@ const modernConfig = {
 	},
 	plugins: [
 		new ManifestPlugin(configureManifest('manifest.json')),
-	]
+	],
 };
 
 // Common module exports
 // noinspection WebpackConfigHighlighting
 module.exports = {
-	'legacyConfig': merge(
-		legacyConfig,
-		baseConfig,
-	),
-	'modernConfig': merge(
-		modernConfig,
-		baseConfig,
-	),
+	'legacyConfig': merge(legacyConfig, baseConfig),
+	'modernConfig': merge(modernConfig, baseConfig),
 };

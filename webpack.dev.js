@@ -58,8 +58,8 @@ const configureImageLoader = (_buildType) => {
 		use: [
 			{
 				loader: 'file-loader',
-				options: { name: 'img/[name].[hash].[ext]' }
-			}
+				options: { name: 'img/[name].[hash].[ext]' },
+			},
 		]
 	};
 };
@@ -77,7 +77,7 @@ const configureSassCssLoader = (buildType) => {
 	if (buildType === LEGACY_CONFIG) {
 		return {
 			test: /\.s[c|a]ss$/,
-			loader: 'ignore-loader'
+			loader: 'ignore-loader',
 		};
 	}
 
@@ -91,11 +91,11 @@ const configureSassCssLoader = (buildType) => {
 					loader: 'css-loader',
 					options: {
 						importLoaders: 2,
-						sourceMap: true
-					}
+						sourceMap: true,
+					},
 				}, {
 					loader: 'sass-loader',
-					options: { sourceMap: true }
+					options: { sourceMap: true },
 				}
 			]
 		};
@@ -109,10 +109,10 @@ const configureSassCssLoader = (buildType) => {
  */
 const configureEsLint = () => {
 	return {
-		enforce: "pre",
+		enforce: 'pre',
 		exclude: /node_modules/,
 		test: /\.js$/,
-		use: [ "eslint-loader" ],
+		use: [ 'eslint-loader' ],
 	};
 };
 

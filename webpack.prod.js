@@ -60,7 +60,7 @@ const configureBanner = () => {
 			' */',
 			''
 		].join('\n'),
-		raw: true
+		raw: true,
 	};
 };
 
@@ -73,7 +73,7 @@ const configureCleanWebpack = () => {
 	return {
 		root: path.resolve(__dirname, settings.paths.dist.base),
 		verbose: true,
-		dry: false
+		dry: false,
 	};
 };
 
@@ -105,7 +105,7 @@ const configureImageLoader = (buildType) => {
 			use: [
 				{
 					loader: 'file-loader',
-					options: { name: 'img/[name].[hash].[ext]' }
+					options: { name: 'img/[name].[hash].[ext]' },
 				}
 			]
 		};
@@ -132,10 +132,10 @@ const configureImageLoader = (buildType) => {
 							require('imagemin-svgo')({
 								plugins: [{ convertPathData: false }]
 							}),
-						]
-					}
-				}
-			]
+						],
+					},
+				},
+			],
 		};
 	}
 };
@@ -158,7 +158,7 @@ const configureOptimization = (buildType) => {
 						name: settings.vars.cssName,
 						test: /\.(pcss|css|vue)$/,
 						chunks: 'all',
-						enforce: true
+						enforce: true,
 					}
 				}
 			},
@@ -171,16 +171,16 @@ const configureOptimization = (buildType) => {
 							annotation: true,
 						},
 						safe: true,
-						discardComments: true
+						discardComments: true,
 					},
-				})
-			]
+				}),
+			],
 		};
 	}
 
 	if (buildType === MODERN_CONFIG) {
 		return {
-			minimizer: [ new TerserPlugin(configureTerser()) ]
+			minimizer: [ new TerserPlugin(configureTerser()) ],
 		};
 	}
 };
@@ -210,7 +210,7 @@ const configureSassLoader = (_buildType) => {
 			{ loader: 'resolve-url-loader' },
 			{
 				loader: 'sass-loader',
-				options: { sourceMap: true }
+				options: { sourceMap: true },
 			}
 		]
 	};
@@ -237,9 +237,9 @@ const configurePurgeCss = () => {
 		extractors: [
 			{
 				extractor: TailwindExtractor,
-				extensions: settings.purgeCssConfig.extensions
+				extensions: settings.purgeCssConfig.extensions,
 			}
-		]
+		],
 	};
 };
 
@@ -253,7 +253,7 @@ const configureTerser = () => {
 	return {
 		cache: true,
 		parallel: true,
-		sourceMap: true
+		sourceMap: true,
 	};
 };
 
@@ -274,7 +274,7 @@ const configureWebapp = () => {
 			developerName: pkg.author.name,
 			developerURL: pkg.author.url,
 			path: settings.paths.dist.base,
-		}
+		},
 	};
 };
 
@@ -298,7 +298,8 @@ module.exports = [
 				],
 			},
 			plugins: [
-				new CleanWebpackPlugin(settings.paths.dist.clean,
+				new CleanWebpackPlugin(
+					settings.paths.dist.clean,
 					configureCleanWebpack()
 				),
 				new MiniCssExtractPlugin({
@@ -311,7 +312,7 @@ module.exports = [
 				new WebappWebpackPlugin(configureWebapp()),
 				new CreateSymlinkPlugin(settings.createSymlinkConfig, true),
 				new SaveRemoteFilePlugin(settings.saveRemoteFileConfig),
-			]
+			],
 		}
 	),
 	merge(
@@ -335,7 +336,7 @@ module.exports = [
 				new webpack.optimize.ModuleConcatenationPlugin(),
 				new webpack.BannerPlugin(configureBanner()),
 				new ImageminWebpWebpackPlugin(),
-			]
+			],
 		}
 	),
 ];
