@@ -1,17 +1,23 @@
 /**
  * External
  */
-import Vue from 'vue';
-import confetti from '../vue/Confetti.vue';
 
 /**
  * Internal
  */
 import '../css/style.scss';
 
-if (document.getElementById('app')) {
-	new Vue({
-		el: '#app',
-		render: h => h(confetti),
+const main = async () => {
+	const Vue = await import(/* webpackChunkName: "vue" */ 'vue');
+	const vm  = new Vue.default({
+		el: "#app",
+		components: {
+			'confetti': () => import(/* webpackChunkName: "confetti" */ '../vue/Confetti.vue'),
+		},
 	});
-}
+};
+
+// Execute async function
+main().then((value) => {
+	//
+});

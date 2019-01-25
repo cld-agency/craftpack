@@ -19,6 +19,7 @@
 					'SandyBrown', 'Chocolate', 'Crimson',
 				],
 			});
+
 			setTimeout(() => {
 				this.$confetti.stop();
 			}, 5000);

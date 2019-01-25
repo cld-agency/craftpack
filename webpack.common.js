@@ -101,8 +101,9 @@ const baseConfig = {
 	name: pkg.name,
 	entry: configureEntries(),
 	output: {
+		chunkFilename: 'js/bundles/[name].bundle.[chunkhash].js',
 		path: path.resolve(__dirname, settings.paths.dist.base),
-		publicPath: settings.urls.publicPath
+		publicPath: settings.urls.publicPath,
 	},
 	resolve: {
 		alias: { 'vue$': 'vue/dist/vue.esm.js' },
