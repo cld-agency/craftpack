@@ -18,12 +18,12 @@ module.exports = {
 			base: './web/dist/',
 			clean: [ './img', './css', './js' ]
 		},
-		templates: './templates/'
+		templates: './templates/',
 	},
 	urls: {
 		live: 'https://craftpack.com/',
 		local: 'http://craftpack.test/',
-		publicPath: '/dist/'
+		publicPath: '/dist/',
 	},
 	vars: { cssName: 'styles' },
 	entries: { 'app': 'app.js' },
