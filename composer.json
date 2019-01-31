@@ -1,6 +1,6 @@
 {
   "require": {
-	"craftcms/cms": "3.1.4",
+	"craftcms/cms": "3.1.6.1",
 	"vlucas/phpdotenv": "^2.4.0",
 	"nystudio107/craft-twigpack": "1.1.4"
   },
